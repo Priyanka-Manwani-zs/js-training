@@ -137,7 +137,9 @@ async function name() {
   console.log("api 2 data");
   let post2 = await fetch("https://jsonplaceholder.typicode.com/posts/2");
   const api2Data = await post2.json();
+
   console.log(api2Data);
+  console.log("api 3 data");
   let post3 = await fetch("https://jsonplaceholder.typicode.com/posts/3");
   const api3Data = await post3.json();
   console.log(api3Data);
@@ -154,7 +156,51 @@ async function race2() {
 }
 console.log(temp);
 
-10;
+//8
+let source1 = new Promise((resolve, reject) => {
+  let res = fetch("https://jsonplaceholder.typicode.com/posts/1");
+  resolve("source1");
+});
+let source2 = new Promise((resolve, reject) => {
+  let res = fetch("https://jsonplaceholder.typicode.com/posts/1");
+  resolve("source2");
+});
+
+let source3 = new Promise((resolve, reject) => {
+  let res = fetch("https://jsonplaceholder.typicode.com/posts/1");
+  resolve("source3");
+});
+
+let rh = Promise.all([source1, source2, source3]).then((response) => {
+  console.log(rh);
+});
+let fast = Promise.race([source1, source2, source3]).then((response) => {
+  console.log("fastest api call is from", fast);
+});
+
+//9
+
+function frequent(id) {
+  return new Promise((resolve, reject) => {
+    if (Math.floor(Math.random() * 100) % 2 == 0) {
+      resolve("resolved");
+    } else {
+      reject("rejected");
+    }
+  });
+}
+const promises = [];
+let i = 1;
+while (i <= 5) {
+  promises.push(frequent(i));
+  i++;
+}
+
+let randomReject = Promise.allSettled(promises).then((el) => {
+  console.log("results: ", el);
+});
+
+//10;
 
 let num1 = new Promise((resolve, reject) => {
   const v1 = 5;
@@ -180,5 +226,3 @@ num1.then((res1) =>
     })
   )
 );
-// num2.then(sum);
-// sum.then((el)=>console.log('sum is',el));
