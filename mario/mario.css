@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mainDiv {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("mario bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.mario-div {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+#mario {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
